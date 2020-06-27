@@ -8,6 +8,7 @@ class Game
     puts "Initial State"
     print_grid
     find_index
+    apply_rules
   end
 
   #prints the first generation of cells
@@ -85,6 +86,19 @@ class Game
       subarray.each_with_index do |cell, column|
         cell_neighbors_count = find_cells_arround(row, column)
         cell_population(row, column, cell_neighbors_count)
+      end
+    end
+  end
+
+  #Apply the rules of game of life to the number grid, and transforms it to a cell grid
+  def apply_rules
+    @number_grid.each do |cellrow|
+      cellrow.map! do |cell|
+        if cell < 2 || cell > 3
+          cell = "."
+        else
+          cell = "x"
+        end
       end
     end
     print_cell_grid
