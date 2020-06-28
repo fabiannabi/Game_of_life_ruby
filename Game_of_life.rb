@@ -1,14 +1,9 @@
+#Game of life implementation
 class Game
   #initial state of the aplication
   def initialize
-    puts "ENTER ONE NUMBER FOR THE MATRIX SIZE"
-    @size = gets.chomp().to_i
-    puts "HOW MANY CICLES DO YOU WANT TO PERFORM"
-    @limit = gets.chomp().to_i
-    puts "ENTER THE PROBABILITY FOR THE BORN RATE OF THE INITIAL STATE FROM 1-100 INTEGER"
-    @prob = gets.chomp().to_i
     @gen_count = 0
-    @grid = Array.new (@size) { Array.new(@size) }
+    @grid = Array.new (20) { Array.new(20) }
 
     #prints the first generation of cells
     first_generation
@@ -23,7 +18,6 @@ class Game
 
   #prints the first generation of cells
   def print_grid
-    system("clear")
     rows = @grid.map do |row|
       row.join(" ")
     end
@@ -33,7 +27,7 @@ class Game
   def first_generation
     @grid.each do |row|
       row.map! do |cell|
-        if rand(100) < @prob
+        if rand(100) < 25
           "x"
         else
           "."
@@ -43,11 +37,8 @@ class Game
   end
 
   def cicle()
-    #pass the initial variables
-    size = @size
-    limit = @limit
     #Creates a new matriz to be replace every time
-    @number_grid = Array.new (size) { Array.new(size) }
+    @number_grid = Array.new (20) { Array.new(20) }
 
     #functions passed to the index finder functionality
     #finds the number of neighbors arround each indivicual cell
@@ -120,13 +111,13 @@ class Game
     print_grid
 
     #check for the limit and restarts the cicle again
-    if @gen_count < limit
-      star_again
+    if @gen_count < 50
+      start_again
     end
   end
 
   # add a delay on each round
-  def star_again
+  def start_again
     sleep 0.2
     cicle
   end
